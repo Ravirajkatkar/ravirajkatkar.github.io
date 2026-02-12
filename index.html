@@ -1061,9 +1061,9 @@
                             <span class="tech-tag">GitHub Actions</span>
                             <span class="tech-tag">AI Integration</span>
                         </div>
-                        <a href="#" class="project-link">
+                        <!-- <a href="#" class="project-link">
                             View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -1084,9 +1084,9 @@
                             <span class="tech-tag">Real-time Control</span>
                             <span class="tech-tag">Redux</span>
                         </div>
-                        <a href="#" class="project-link">
+                        <!-- <a href="#" class="project-link">
                             View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -1107,9 +1107,9 @@
                             <span class="tech-tag">Firebase</span>
                             <span class="tech-tag">Push Notifications</span>
                         </div>
-                        <a href="#" class="project-link">
+                        <!-- <a href="#" class="project-link">
                             View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -1130,9 +1130,9 @@
                             <span class="tech-tag">Real-time Updates</span>
                             <span class="tech-tag">Analytics</span>
                         </div>
-                        <a href="#" class="project-link">
+                        <!-- <a href="#" class="project-link">
                             View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -1153,9 +1153,9 @@
                             <span class="tech-tag">Security</span>
                             <span class="tech-tag">API Integration</span>
                         </div>
-                        <a href="#" class="project-link">
+                        <!-- <a href="#" class="project-link">
                             View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -1176,9 +1176,9 @@
                             <span class="tech-tag">Encryption</span>
                             <span class="tech-tag">Chat Integration</span>
                         </div>
-                        <a href="#" class="project-link">
+                        <!-- <a href="#" class="project-link">
                             View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -1199,9 +1199,9 @@
                             <span class="tech-tag">Payment Gateway</span>
                             <span class="tech-tag">Order Tracking</span>
                         </div>
-                        <a href="#" class="project-link">
+                        <!-- <a href="#" class="project-link">
                             View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -1222,9 +1222,9 @@
                             <span class="tech-tag">Real-time Chat</span>
                             <span class="tech-tag">Cloud Storage</span>
                         </div>
-                        <a href="#" class="project-link">
+                        <!-- <a href="#" class="project-link">
                             View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -1245,9 +1245,9 @@
                             <span class="tech-tag">Analytics</span>
                             <span class="tech-tag">Parent Portal</span>
                         </div>
-                        <a href="#" class="project-link">
+                        <!-- <a href="#" class="project-link">
                             View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -1549,7 +1549,7 @@
                     </div>
                 </div>
 
-                <form class="contact-form">
+                <form class="contact-form" onsubmit="sendMail(event)">
                     <div class="row">
                         <div class="col-md-6">
                             <input type="text" id="name" class="form-control" placeholder="Your Name" required>
@@ -1558,9 +1558,8 @@
                             <input type="email" id="email" class="form-control" placeholder="Your Email" required>
                         </div>
                     </div>
-                    <!-- <input type="text" class="form-control" placeholder="Subject" required> -->
                     <textarea class="form-control" id="message" placeholder="Your Message" required></textarea>
-                    <button type="submit" onsubmit="sendMail(); return false;" class="btn-primary-custom w-100">
+                    <button type="submit" class="btn-primary-custom w-100">
                         <i class="fas fa-paper-plane me-2"></i>Send Message
                     </button>
                 </form>
@@ -1597,21 +1596,26 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-    function sendMail() {
-      var name = document.getElementById("name").value;
-      var email = document.getElementById("email").value;
-      var message = document.getElementById("message").value;
-    
-      var link = "mailto:ravirajhkatkar@gmail.com"
-        + "?subject=" + encodeURIComponent("New message from " + name)
-        + "&body=" + encodeURIComponent(
-            "Name: " + name + "\n"
-            + "Email: " + email + "\n\n"
-            + "Message:\n" + message
-          );
-    
-      window.location.href = link;
-    }
+        function sendMail(event) {
+            event.preventDefault(); // prevent form reload
+        
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var message = document.getElementById("message").value;
+        
+            var link = "mailto:ravirajhkatkar@gmail.com"
+                + "?subject=" + encodeURIComponent("New message from " + name)
+                + "&body=" + encodeURIComponent(
+                    "Name: " + name + "\n"
+                    + "Email: " + email + "\n\n"
+                    + "Message:\n" + message
+                );
+        
+            window.location.href = link;
+        
+            // Optional: Reset form after opening Gmail
+            document.querySelector(".contact-form").reset();
+        }
     </script>
     
     <script>

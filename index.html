@@ -1560,7 +1560,7 @@
                     </div>
                     <!-- <input type="text" class="form-control" placeholder="Subject" required> -->
                     <textarea class="form-control" id="message" placeholder="Your Message" required></textarea>
-                    <button type="submit" class="btn-primary-custom w-100">
+                    <button type="submit" onsubmit="sendMail(); return false;" class="btn-primary-custom w-100">
                         <i class="fas fa-paper-plane me-2"></i>Send Message
                     </button>
                 </form>

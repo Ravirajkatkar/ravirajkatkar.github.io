@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raviraj Katkar - Mobile Application Developer</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%236a11cb;stop-opacity:1%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%232575fc;stop-opacity:1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23111%22/%3E%3Ctext x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 fill=%22url(%23grad)%22 font-family=%22Arial%22 font-size=%2250%22 font-weight=%22800%22 dy=%22.3em%22%3ERK%3C/text%3E%3C/svg%3E'>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00f5ff;
+            --secondary: #ff006e;
+            --accent: #8338ec;
+            --dark-bg: #0a0e27;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-hero: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--dark-bg);
+        }
+        
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: backgroundMove 60s linear infinite;
+        }
+        
+        @keyframes backgroundMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--gradient-1);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: var(--gradient-2);
+            top: 50%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+        
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-3);
+            bottom: 10%;
+            left: 40%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-50px, 50px) scale(0.9); }
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-brand {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary) !important;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .typing-text {
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            min-height: 60px;
+            font-weight: 500;
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.5rem;
+            background: var(--primary);
+            margin-left: 5px;
+            animation: blink 0.7s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin: 2rem 0;
+            line-height: 1.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary-custom {
+            background: var(--gradient-1);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary-custom:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+        
+        .btn-secondary-custom {
+            background: transparent;
+            color: white;
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary-custom:hover {
+            background: var(--primary);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 245, 255, 0.3);
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* About Section */
+        .about-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .highlight-text {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .about-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-badge {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-badge:hover {
+            background: var(--primary);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 245, 255, 0.3);
+        }
+        
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .timeline-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: relative;
+            width: calc(50% - 40px);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 245, 255, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--primary);
+            z-index: 2;
+        }
+        
+        .company-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-duration {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .job-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.3);
+        }
+        
+        .project-header {
+            background: var(--gradient-1);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-body {
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-tag {
+            background: rgba(131, 56, 236, 0.1);
+            color: var(--accent);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(131, 56, 236, 0.2);
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            gap: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(0, 245, 255, 0.2);
+        }
+        
+        .skill-category-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .skill-percentage {
+            color: var(--primary);
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            transition: width 1.5s ease;
+            position: relative;
+        }
+        
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(0, 245, 255, 0.05);
+            transform: translateX(10px);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .contact-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-secondary);
+        }
+        
+        .contact-details p {
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .contact-form .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+            color: white;
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--dark-bg);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.4);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 5rem;
+        }
+        
+        .footer p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .typing-text {
+                font-size: 1.3rem;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary-custom,
+            .btn-secondary-custom {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#home">RK</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="hero-content" data-aos="fade-up">
+                        <div class="hero-subtitle">Mobile Application Developer</div>
+                        <h1 class="hero-title">Raviraj Katkar</h1>
+                        <div class="typing-text">
+                            <span id="typed-text"></span>
+                            <span class="typing-cursor"></span>
+                        </div>
+                        <p class="hero-description">
+                            Transforming ideas into powerful mobile experiences with 4+ years of expertise in React Native.
+                            Specialized in building scalable, high-performance applications that millions of users love.
+                        </p>
+                        <div class="cta-buttons">
+                            <a href="#contact" class="btn-primary-custom">
+                                <i class="fas fa-envelope me-2"></i>Get In Touch
+                            </a>
+                            <a href="#projects" class="btn-secondary-custom">
+                                <i class="fas fa-rocket me-2"></i>View Projects
+                            </a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                                <div class="stat-number">4+</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                                <div class="stat-number">15+</div>
+                                <div class="stat-label">Projects Completed</div>
+                            </div>
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Client Satisfaction</div>
+                            </div>
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Companies</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">About Me</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Passionate about creating exceptional mobile experiences
+            </p>
+            <div class="about-card" data-aos="fade-up" data-aos-delay="200">
+                <p class="about-text">
+                    I'm a <span class="highlight-text">Mobile Application Developer</span> with over 4+ years of experience 
+                    specializing in <span class="highlight-text">React Native</span> development. My journey in mobile development 
+                    has been driven by a passion for creating intuitive, high-performance applications that solve real-world problems.
+                </p>
+                <p class="about-text">
+                    Currently working at <span class="highlight-text">EarnWealth Solutions</span>, I lead the development of 
+                    cutting-edge fintech applications, manage cloud infrastructure on Microsoft Azure, and implement CI/CD pipelines 
+                    for seamless deployment. I've successfully delivered 15+ projects across various domains including fintech, 
+                    healthcare, education, and IoT.
+                </p>
+                <p class="about-text">
+                    My expertise spans the entire mobile development lifecycle—from architectural design and API integration to 
+                    deployment and maintenance. I'm proficient in both Android and iOS platforms, with deep knowledge of React Native, 
+                    Node.js, Redux, and modern JavaScript frameworks.
+                </p>
+                <div class="about-skills">
+                    <span class="skill-badge">React Native Expert</span>
+                    <span class="skill-badge">Node.js Backend</span>
+                    <span class="skill-badge">Azure Cloud</span>
+                    <span class="skill-badge">CI/CD Pipelines</span>
+                    <span class="skill-badge">Team Leadership</span>
+                    <span class="skill-badge">API Integration</span>
+                    <span class="skill-badge">Redux/MobX</span>
+                    <span class="skill-badge">TypeScript</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Experience</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                My professional journey and achievements
+            </p>
+            <div class="timeline">
+                <!-- Experience 1 -->
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="company-name">EarnWealth Solutions</div>
+                        <div class="job-title">Software Engineer</div>
+                        <div class="job-duration">
+                            <i class="fas fa-calendar me-2"></i>November 2023 - Present | Pune
+                        </div>
+                        <div class="job-description">
+                            Leading full-stack mobile development initiatives, architecting scalable fintech solutions, and managing 
+                            cloud infrastructure. Key achievements include developing SpeedTech.AI (AI-powered telecalling platform), 
+                            Sicca IoT application, and multiple business management apps. Implementing CI/CD pipelines with GitHub 
+                            Actions and managing Microsoft Azure deployments.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="company-name">Appzia Technologies</div>
+                        <div class="job-title">React Native Developer</div>
+                        <div class="job-duration">
+                            <i class="fas fa-calendar me-2"></i>July 2022 - November 2023 | Pune
+                        </div>
+                        <div class="job-description">
+                            Led end-to-end development of multiple mobile applications from concept to deployment. Managed client 
+                            relationships and team coordination. Successfully delivered projects including Animade (educational platform), 
+                            Bioenzene (e-pharmacy), Influny (social media app), and Unicircle (school management system).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 3 -->
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="400">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="company-name">Aadi Technology</div>
+                        <div class="job-title">Software Engineer Intern</div>
+                        <div class="job-duration">
+                            <i class="fas fa-calendar me-2"></i>December 2021 - July 2022 | Pune
+                        </div>
+                        <div class="job-description">
+                            Developed UI components and integrated APIs for mobile and web applications. Worked on KPay (digital 
+                            payment application) and RITe School (educational platform). Gained hands-on experience with React 
+                            Native, payment gateway integration, and Agile methodology.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Showcasing my best work and innovations
+            </p>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="project-header">
+                        <div class="project-icon">🤖</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">SpeedTech.AI (Raiya)</h3>
+                        <p class="project-description">
+                            AI-powered telecalling platform with advanced automation. Developed complete Node.js backend, 
+                            configured Azure cloud infrastructure, and implemented CI/CD pipelines.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Azure</span>
+                            <span class="tech-tag">GitHub Actions</span>
+                            <span class="tech-tag">AI Integration</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="project-header">
+                        <div class="project-icon">🌾</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Sicca – Sense It Out</h3>
+                        <p class="project-description">
+                            IoT-based mobile application enabling farmers to remotely manage water pumps and fertilizer 
+                            systems, improving agricultural efficiency.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">IoT Integration</span>
+                            <span class="tech-tag">Real-time Control</span>
+                            <span class="tech-tag">Redux</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="project-header">
+                        <div class="project-icon">👔</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">JustKlap</h3>
+                        <p class="project-description">
+                            Business meeting management app connecting professionals with nearby business opportunities 
+                            through intelligent networking features.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Geolocation</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Push Notifications</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="project-header">
+                        <div class="project-icon">🛡️</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">CheckMate – Alert</h3>
+                        <p class="project-description">
+                            Internal operations app for security staff management with real-time attendance tracking, 
+                            reporting, and location monitoring capabilities.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">GPS Tracking</span>
+                            <span class="tech-tag">Real-time Updates</span>
+                            <span class="tech-tag">Analytics</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="project-header">
+                        <div class="project-icon">🎣</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">PhishBowl</h3>
+                        <p class="project-description">
+                            Scam detection and reporting application helping users identify and report fraudulent emails, 
+                            messages, and transactions for enhanced security.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">ML Integration</span>
+                            <span class="tech-tag">Security</span>
+                            <span class="tech-tag">API Integration</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="project-header">
+                        <div class="project-icon">🤝</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">BNG (Business Networking)</h3>
+                        <p class="project-description">
+                            Networking platform facilitating secure sharing of business leads and opportunities within 
+                            trusted professional circles.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Social Features</span>
+                            <span class="tech-tag">Encryption</span>
+                            <span class="tech-tag">Chat Integration</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="project-header">
+                        <div class="project-icon">💊</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Bioenzene</h3>
+                        <p class="project-description">
+                            E-pharmacy platform enabling users to upload prescriptions and receive medicines at their 
+                            doorstep with secure payment integration.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">E-commerce</span>
+                            <span class="tech-tag">Payment Gateway</span>
+                            <span class="tech-tag">Order Tracking</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 8 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="project-header">
+                        <div class="project-icon">📱</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Influny</h3>
+                        <p class="project-description">
+                            Social media application with advanced features including stories, reels, messaging, and 
+                            content discovery algorithms.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Video Processing</span>
+                            <span class="tech-tag">Real-time Chat</span>
+                            <span class="tech-tag">Cloud Storage</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 9 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="project-header">
+                        <div class="project-icon">🎓</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Unicircle</h3>
+                        <p class="project-description">
+                            Comprehensive school management system for managing class routines, exam results, and enabling 
+                            parental monitoring of student activities.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Education</span>
+                            <span class="tech-tag">Analytics</span>
+                            <span class="tech-tag">Parent Portal</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Technical Skills</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Expertise across the mobile development stack
+            </p>
+            <div class="skills-grid">
+                <!-- Mobile Development -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="skill-category-title">Mobile Development</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>React Native</span>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>JavaScript (ES6+)</span>
+                            <span class="skill-percentage">92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="92%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>TypeScript</span>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="88%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Flutter</span>
+                            <span class="skill-percentage">70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="70%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- State Management & Frontend -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="skill-category-title">State Management & UI</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Redux / Redux Toolkit</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>MobX</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>React.js</span>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="88%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>CSS3 / Tailwind / Bootstrap</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend & APIs -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="skill-category-title">Backend & APIs</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Node.js</span>
+                            <span class="skill-percentage">87%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="87%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>RESTful APIs</span>
+                            <span class="skill-percentage">93%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="93%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>MySQL / SQL</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Firebase</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DevOps & Cloud -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="skill-category-title">DevOps & Cloud</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Microsoft Azure</span>
+                            <span class="skill-percentage">82%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="82%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>CI/CD (GitHub Actions)</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Docker</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Git / GitHub</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="90%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Testing -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="600">
+                    <h3 class="skill-category-title">Tools & Testing</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Jest / Testing Library</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Postman</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Jira / Agile</span>
+                            <span class="skill-percentage">87%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="87%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Figma / UI Design</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration & Third-Party -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="700">
+                    <h3 class="skill-category-title">Integration & Services</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Payment Gateways</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Push Notifications</span>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="88%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Google Maps / Location</span>
+                            <span class="skill-percentage">83%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="83%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Social Auth / OAuth</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Get In Touch</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Let's work together on your next project
+            </p>
+            <div class="contact-section" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>ravirajhkatkar@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+91 9112437153</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Pune, Maharashtra, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Subject" required>
+                    <textarea class="form-control" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn-primary-custom w-100">
+                        <i class="fas fa-paper-plane me-2"></i>Send Message
+                    </button>
+                </form>
+
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/raviraj-katkar-736438227" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/Ravirajkatkar" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:ravirajhkatkar@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="tel:+919112437153" class="social-link">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Raviraj Katkar. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Typing animation
+        const typingText = document.getElementById('typed-text');
+        const phrases = [
+            'React Native Specialist',
+            'Mobile App Architect',
+            'Full-Stack Developer',
+            'Team Lead & Mentor',
+            'Cloud Infrastructure Expert',
+            'Problem Solver'
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeText() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+            }
+
+            const typingSpeed = isDeleting ? 50 : 100;
+            setTimeout(typeText, typingSpeed);
+        }
+
+        // Start typing animation
+        typeText();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Skill progress animation
+        const skillProgressBars = document.querySelectorAll('.skill-progress');
+        
+        const animateSkills = () => {
+            skillProgressBars.forEach(bar => {
+                const barPosition = bar.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (barPosition < screenPosition) {
+                    const targetWidth = bar.getAttribute('data-width');
+                    bar.style.width = targetWidth;
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateSkills);
+        window.addEventListener('load', animateSkills);
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Mobile menu close on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse.classList.contains('show')) {
+                    navbarCollapse.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

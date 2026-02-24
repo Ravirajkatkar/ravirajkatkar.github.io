@@ -2740,12 +2740,17 @@
                 btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Sending...';
                 btn.disabled = true;
 
-                emailjs.send("service_d4xq8y6", "template_xqz35jq", {
+                const templateParams = {
                     name: name,
                     email: email,
                     subject: subject,
                     message: message
-                })
+                };
+            
+                emailjs.send("service_d4xq8y6", "template_xqz35jq", templateParams)
+                    .then(function () {
+                        return emailjs.send("service_d4xq8y6", "template_mjemmy4", templateParams);
+                    })
                     .then(function () {
                         msg.style.display = 'block';
                         msg.style.color = 'var(--accent)';

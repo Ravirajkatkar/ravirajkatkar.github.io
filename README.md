@@ -42,13 +42,9 @@ I'm a Software Engineer passionate about building seamless, high-performance cro
 ```
 ravirajkatkar.github.io/
 ├── index.html          # Main HTML file
-├── assets/
-│   ├── image.png       # Profile photo
-│   └── RavirajKatkar-Resume.pdf
-├── css/
-│   └── style.css       # Stylesheet
-└── js/
-    └── main.js         # JavaScript logic
+└── assets/
+   ├── image.png       # Profile photo
+   └── RavirajKatkar-Resume.pdf   # Resume
 ```
 
 ---
